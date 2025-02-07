@@ -1,4 +1,34 @@
 {
-    "wait1": "10",
-    "page1": "https://the-internet.herokuapp.com/dynamic_controls"
+	"Baseurl": "https://backend-api-qa.deephealthos.com/",
+	"// Test1": "Logs user into the system",
+	"Logs_user_into_the_system_URL": "{{Baseurl}}api/v2/auth",
+	"Logs_user_into_the_system_apirequest": "{  \"email\": \"adminalgo@yopmail.com\",  \"password\": \"Test@1234\"}",
+	"Logs_user_into_the_system_apiheader": "content-type:application/json",
+	"Logs_user_into_the_system_apioutput": "200",
+	"storeresponsevariable1": "data.token",
+	
+	"// Test2": "Radio login",
+	"Radio_login_URL": "{{Baseurl}}api/v2/auth",
+	"Radio_login_apirequest": "{  \"email\": \"radtestalgo1@yopmail.com\",  \"password\": \"TestTest0123!\"}",
+	"Radio_login_apiheader": "content-type:application/json",
+	"Radio_login_apioutput": "200,token",
+	"storeresponsevariable2": "radiotoken::data.token",
+	
+	"// Test3": "Order Density",
+	"Order_Density_URL": "{{Baseurl}}api/v2/orders/{{EbcdID}}/snips",
+	"Order_Density_apiheader": "content-type:application/json,Authorization: Bearer @storeresponsevariable1.data.token",
+	"Order_Density_apiparametertype": "type:density",
+	"Order_Density_apioutput": "200,\"id\":11,\"shortSnip\":\"A: Mostly Fatty\",\"longSnip\":\"A. Mostly fatty: Breasts are made up of mostly fat with little fibrous and glandular tissue.\"",
+	
+	"// Test4": "Get orders in the inflight tab",
+	"Get_orders_in_the_inflight_tab_URL": "{{Baseurl}}api/v2/orders",
+	"Get_orders_in_the_inflight_tab_apiheader": "content-type:application/json,Authorization: Bearer @storeresponsevariable1.data.token",
+	"Get_orders_in_the_inflight_tab_apiparametertype": "limit:30,offset:0,filter:inflight,sort:W3sicHJpb3JpdHkiOiJhc2MifSx7InRhdCI6ImRlc2MifV0,orderSearchWithFilters:false,externalLink:true",
+	"Get_orders_in_the_inflight_tab_apioutput": "200,\"newStatusId\":10",
+	
+	"// Test5": "Get order in assure response",
+	"Get_order_in_assure_response_URL": "{{Baseurl}}api/v2/orders",
+	"Get_order_in_assure_response_apiheader": "content-type:application/json,Authorization: Bearer @storeresponsevariable1.data.token",
+	"Get_order_in_assure_response_apiparametertype": "limit:30,offset:0,filter:assureResponse,orderSearchWithFilters:false,externalLink:true",
+	"Get_order_in_assure_response_apioutput": "200,\"newStatusId\":17"
 }

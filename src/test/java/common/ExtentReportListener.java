@@ -22,7 +22,6 @@ public class ExtentReportListener {
 
 	private static ExtentReports extent;
 	private static ExtentTest test;
-	private static WebDriver driver;
 	public static String reportextentLog = "";
 	static String path = System.getProperty("user.dir");
 
@@ -31,8 +30,6 @@ public class ExtentReportListener {
 	public void setup(Scenario scenario) {
 		String congipath = Paths.get(path.toString(), "src", "test", "java", "Configuration.xml").toString();
 		CommonUtil.loadXMLConfigurationFile(congipath);
-		String objectpath = Paths.get(path.toString(), "src", "test", "java", "ObjectRepository.json").toString();
-		CommonUtil.loadJSONFile(objectpath);
 		String datapath = Paths.get(path.toString(), "src", "test", "java", "TestData.json").toString();
 		CommonUtil.loadJSONTestData(datapath);
 
@@ -69,19 +66,12 @@ public class ExtentReportListener {
 	public void afterStep(Scenario scenario) {
 		String eachstep = CommonUtil.getXMLTagValue("EnableEachStepScreenshot");
 		try {
-			driver = WebBrowserLancher.getDriver();
 			String stepName = StepListener.stepName;
 			String finalLog = stepName + "<br>" + reportextentLog.replace("\n", "<br>");
 			if (scenario.isFailed()) {
-				TakesScreenshot ts = (TakesScreenshot) driver;
-				String screenshotBase64 = ts.getScreenshotAs(OutputType.BASE64);
-				Media media = MediaEntityBuilder.createScreenCaptureFromBase64String(screenshotBase64).build();
-				test.fail("Step Failed", media);
+				test.fail("Step Failed");
 			} else if (stepName.toLowerCase().contains("verify") || eachstep.equalsIgnoreCase("true")) {
-				TakesScreenshot ts = (TakesScreenshot) driver;
-				String screenshotBase64 = ts.getScreenshotAs(OutputType.BASE64);
-				Media media = MediaEntityBuilder.createScreenCaptureFromBase64String(screenshotBase64).build();
-				test.pass(finalLog, media);
+				test.pass(finalLog);
 			} else {
 				test.pass(finalLog);
 			}
@@ -99,7 +89,6 @@ public class ExtentReportListener {
 		} else {
 			test.log(Status.PASS, "Scenario Passed: " + scenario.getName());
 		}
-		WebBrowserLancher.closeBrowserInstance();
 	}
 
 	@AfterAll
