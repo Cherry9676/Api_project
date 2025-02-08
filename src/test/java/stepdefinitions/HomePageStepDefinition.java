@@ -16,31 +16,31 @@ public class HomePageStepDefinition {
 
 	}
 
-	@When("^I set API endpoint in Logs user into the system api as '(.*)'$")
+	@When("^I set API endpoint in Update pet API as '(.*)'$")
 	public void WhenISetApiEndpointInLogsUserIntoTheSystemApiAsurl(String _url) {
 		workFlow.setAPIEndpoint(_url);
 
 	}
 
-	@When("^I set API Method in Logs user into the system api as '(.*)'$")
+	@When("^I set API Method in Update pet API as '(.*)'$")
 	public void WhenISetApiMethodInLogsUserIntoTheSystemApiAspost(String _post) {
 		workFlow.setAPIMethod(_post);
 
 	}
 
-	@When("^I set API Request in Logs user into the system api as '(.*)'$")
+	@When("^I set API Request in Update pet API as '(.*)'$")
 	public void WhenISetApiRequestInLogsUserIntoTheSystemApiAsapiRequest(String _apiRequest) {
 		workFlow.setAPIRequest(_apiRequest);
 
 	}
 
-	@When("^I set API Headers in Logs user into the system api as '(.*)'$")
+	@When("^I set API Headers in Update pet API as '(.*)'$")
 	public void WhenISetApiHeadersInLogsUserIntoTheSystemApiAsapiHeader(String _apiHeader) {
 		workFlow.setAPIHeaders(_apiHeader);
 
 	}
 
-	@Then("^execute API and verify in Logs user into the system api as '(.*)'$")
+	@Then("^execute API and verify in Update pet API as '(.*)'$")
 	public void ThenExecuteApiVerifyInRadioLoginApiAsapiOutput1(String _apiOutput) {
 		assertTrue(workFlow.executeAPIAndVerify(_apiOutput));
 	}
@@ -51,31 +51,31 @@ public class HomePageStepDefinition {
 
 	}
 
-	@When("^I set API endpoint in Radio login api as '(.*)'$")
+	@When("^I set API endpoint as '(.*)'$")
 	public void WhenISetApiEndpointInRadioLoginApiAsurl(String _url) {
 		workFlow.setAPIEndpoint(_url);
 
 	}
 
-	@When("^I set API Method in Radio login api as '(.*)'$")
+	@When("^I set API Method as '(.*)'$")
 	public void WhenISetApiMethodInRadioLoginApiAspost(String _post) {
 		workFlow.setAPIMethod(_post);
 
 	}
 
-	@When("^I set API Request in Radio login api as '(.*)'$")
+	@When("^I set API Request Body as '(.*)'$")
 	public void WhenISetApiRequestInRadioLoginApiAsapiRequest(String _apiRequest) {
 		workFlow.setAPIRequest(_apiRequest);
 
 	}
 
-	@When("^I set API Headers in Radio login api as '(.*)'$")
+	@When("^I set API Headers as '(.*)'$")
 	public void WhenISetApiHeadersInRadioLoginApiAsapiHeader(String _apiHeader) {
 		workFlow.setAPIHeaders(_apiHeader);
 
 	}
 
-	@Then("^execute API and verify in Radio login api as '(.*)'$")
+	@Then("^I execute API request and verify response as '(.*)'$")
 	public void ThenExecuteApiVerifyInRadioLoginApiAsapiOutput2(String _apiOutput) {
 
 		assertTrue(workFlow.executeAPIAndVerify(_apiOutput));

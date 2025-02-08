@@ -1,5 +1,6 @@
 package common;
 
+import io.cucumber.java.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -14,6 +15,28 @@ public class ApiRestAssured {
 	private static String apiRequestPayload;
 	private static String accessToken;
 	public static Response response;
+
+	// Reset static variables before and after tests
+	@Before
+	public void setUp() {
+		apiUrl = null;
+		apiMethodType = null;
+		apiHeaders = null;
+		apiRequestPayload = null;
+		accessToken = null;
+		response = null;
+	}
+
+	@After
+	public void tearDown() {
+		// Optionally, reset static variables after each test scenario
+		apiUrl = null;
+		apiMethodType = null;
+		apiHeaders = null;
+		apiRequestPayload = null;
+		accessToken = null;
+		response = null;
+	}
 
 	// Setters for API inputs
 	public static void setApiUrl(String apiUrl) {
@@ -38,66 +61,58 @@ public class ApiRestAssured {
 
 	// Universal method to verify API URL and handle chained requests
 	public static boolean verifyApiUrl(String param) {
-		if (apiUrl == null || apiUrl.isEmpty()) {
-			System.out.println("API URL is not set.");
-			return false;
-		}
-
 		try {
 			RequestSpecification request = RestAssured.given();
 
-			// Add headers if available
+			// Parse Headers Correctly
 			if (apiHeaders != null && !apiHeaders.isEmpty()) {
-				String[] headerPairs = apiHeaders.split(";");
-				for (String header : headerPairs) {
-					String[] keyValue = header.split(":");
-					if (keyValue.length == 2) {
-						request.header(keyValue[0].trim(), keyValue[1].trim());
-					}
+				JSONObject headersJson = new JSONObject(apiHeaders);
+				for (String key : headersJson.keySet()) {
+					request.header(key, headersJson.getString(key));
 				}
 			}
 
-			// Add body if provided
+			// Parse JSON Body Correctly
 			if (apiRequestPayload != null && !apiRequestPayload.isEmpty()) {
-				request.body(apiRequestPayload);
+				request.body(new JSONObject(apiRequestPayload).toString());
 			}
 
-			// Perform first API request
-			if (accessToken == null) {
-				response = sendRequest(request, apiUrl, apiMethodType);
+			// Add Access Token if available
+			if (accessToken != null) {
+				request.header("Authorization", "Bearer " + accessToken);
 			}
+
+			// Make API request (PUT Method)
 			response = sendRequest(request, apiUrl, apiMethodType);
 
-			// Extract access token if present
-			if (response.jsonPath().get("token") != null) {
-				accessToken = response.jsonPath().getString("token");
-				System.out.println("Access Token: " + accessToken);
-			}
-
-			// If a second request is needed, make it using the access token
-			if (accessToken != null) {
-				System.out.println("Making second API request with Access Token...");
-
-				RequestSpecification secondRequest = RestAssured.given().header("Authorization",
-						"Bearer " + accessToken);
-				response = sendRequest(secondRequest, apiUrl, apiMethodType);
-			}
-
-			// Validate response status
+			// Extract Status Code & Response Body
 			int statusCode = response.then().extract().statusCode();
-			String responseBody = response.getBody().asString(); // Extracts response body as String
+			String responseBody = response.getBody().asString();
 
-			// Log Status Code & Response Body to Extent Report
-			ExtentReportListener.reportextentLog = "Status Code: " + statusCode + "\nResponse Body: " + responseBody;
-
-			// Print to Console
+			// Log Status & Response
 			System.out.println("Response Status Code: " + statusCode);
 			System.out.println("Response Body: " + responseBody);
 
-			return statusCode == 200; // Success if API returns 200 OK
+			ExtentReportListener.reportextentLog = "Response Status Code: " + statusCode + "\nResponse Body: "
+					+ responseBody;
+
+			return statusCode == 200; // Return true if API call succeeds
 		} catch (Exception e) {
 			System.out.println("Error verifying API URL: " + e.getMessage());
 			return false;
+		}
+	}
+
+	private static Response sendRequest(RequestSpecification request, String url, String methodType) {
+		switch (methodType.toUpperCase()) {
+		case "POST":
+			return request.when().post(url);
+		case "PUT":
+			return request.when().put(url);
+		case "DELETE":
+			return request.when().delete(url);
+		default:
+			return request.when().get(url);
 		}
 	}
 
@@ -110,20 +125,6 @@ public class ApiRestAssured {
 		// Log the token
 		System.out.println("Extracted Token: " + accessToken);
 		ExtentReportListener.reportextentLog = "Extracted Token: " + accessToken;
-	}
-
-	// Helper method to send API request based on method type
-	private static Response sendRequest(RequestSpecification request, String url, String methodType) {
-		switch (methodType.toUpperCase()) {
-		case "POST":
-			return request.when().post(url);
-		case "PUT":
-			return request.when().put(url);
-		case "DELETE":
-			return request.when().delete(url);
-		default:
-			return request.when().get(url);
-		}
 	}
 
 	public static void lanchApiApplication() {

@@ -40,6 +40,7 @@ public class ExtentReportListener {
 		// Initialize the reporting system if needed (as you already have)
 		if (extent == null) {
 			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+			timeStamp = "Extent_" + timeStamp;
 			String reportDirPath = System.getProperty("user.dir") + "/ExtentReports/" + timeStamp;
 			File reportDir = new File(reportDirPath);
 			if (!reportDir.exists()) {
@@ -49,7 +50,7 @@ public class ExtentReportListener {
 			String reportFilePath = reportDirPath + "/Report.html";
 
 			ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(reportFilePath);
-			htmlReporter.config().setTheme(Theme.STANDARD);
+			htmlReporter.config().setTheme(Theme.DARK);
 			htmlReporter.config().setDocumentTitle("BDD Test Report");
 			htmlReporter.config().setReportName("Automation Test Report");
 
@@ -64,14 +65,13 @@ public class ExtentReportListener {
 
 	@AfterStep
 	public void afterStep(Scenario scenario) {
-		String eachstep = CommonUtil.getXMLTagValue("EnableEachStepScreenshot");
 		try {
 			String stepName = StepListener.stepName;
 			String finalLog = stepName + "<br>" + reportextentLog.replace("\n", "<br>");
+
 			if (scenario.isFailed()) {
-				test.fail("Step Failed");
-			} else if (stepName.toLowerCase().contains("verify") || eachstep.equalsIgnoreCase("true")) {
-				test.pass(finalLog);
+				test.fail("Step Failed: " + stepName);
+				System.out.println("Failed Step: " + stepName); // Log to Console
 			} else {
 				test.pass(finalLog);
 			}
