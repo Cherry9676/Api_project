@@ -22,6 +22,10 @@
 	
 	"Get_order_in_assure_response_URL":"{{Baseurl}}api/v3/pet/10",
 	"Get_order_in_assure_response_apiparametertype":"10",
-	"Get_order_in_assure_response_apioutput":"200"
+	"Get_order_in_assure_response_apioutput":"200",
+	
+	"Get_orders_in_pending_tab_URL":"{{Baseurl}}api/v3/pet/8",
+	"Get_orders_in_pending_tab_apiparametertype":"name=chintu&status=pass",
+	"Get_orders_in_pending_tab_apioutput":"200"
 	
 }

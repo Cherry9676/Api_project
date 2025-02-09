@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/java/features", glue = { "stepdefinitions", "common" },//tags = "@test001",
+@CucumberOptions(features = "src/test/java/features", glue = { "stepdefinitions", "common" },//tags = "@test006",
 		plugin = { "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", "common.StepListener" })
 public class TestRunner {
 	public static int retries = 0;
