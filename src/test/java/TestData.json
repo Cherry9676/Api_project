@@ -18,6 +18,10 @@
 	
 	
 	"Order_Density_URL4":"{{Baseurl}}api/v3/pet/findByTags",
-	"Order_Density_apiparametertype4":"tags=string&tags=string"
+	"Order_Density_apiparametertype4":"tags=string&tags=string",
+	
+	"Get_order_in_assure_response_URL":"{{Baseurl}}api/v3/pet/10",
+	"Get_order_in_assure_response_apiparametertype":"10",
+	"Get_order_in_assure_response_apioutput":"200"
 	
 }

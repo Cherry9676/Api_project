@@ -82,51 +82,32 @@ public class HomePageStepDefinition {
 	public void executeAPIAndVerifyInGetOrdersInInflightTabAPI(String expectedOutput) {
 		assertTrue(workFlow.executeAPIAndVerify(expectedOutput));
 	}
-}
 
-//
-//            @When("^I set API endpoint in Radio login api as '(.*)'$")			
-//            public void WhenISetApiEndpointInRadioLoginApiAsurl(String  _url)
-//            {
-//                workFlow.setAPIEndpoint(_url,0,"Home Page","Home Page.URLTextBoxID","ID");
-//                
-//            }
-//
-//            @When("^I set API Method in Radio login api as '(.*)'$")			
-//            public void WhenISetApiMethodInRadioLoginApiAspost(String  _post)
-//            {
-//                workFlow.setAPIMethod(_post,0,"Home Page","Home Page.apimethodTextBoxID","ID");
-//                
-//            }
-//
-//            @When("^I set API Request in Radio login api as '(.*)'$")			
-//            public void WhenISetApiRequestInRadioLoginApiAsapiRequest(String  _apiRequest)
-//            {
-//                workFlow.setAPIRequest(_apiRequest,0,"Home Page","Home Page.apirequestTextBoxID","ID");
-//                
-//            }
-//
-//            @When("^I set API Headers in Radio login api as '(.*)'$")			
-//            public void WhenISetApiHeadersInRadioLoginApiAsapiHeader(String  _apiHeader)
-//            {
-//                workFlow.setAPIHeaders(_apiHeader,0,"Home Page","Home Page.apiheaderTextBoxID","ID");
-//                
-//            }
-//
-//             @Then("^execute API and verify in Radio login api as '(.*)'$")			
-//            public void ThenExecuteApiVerifyInRadioLoginApiAsapiOutput(String  _apiOutput)
-//            {
-//                Assertion.IsTrue(workFlow.executeAPIAndVerify(_apiOutput,0,"Home Page","Home Page.apioutputTextBoxID","ID"), "Then execute API and verify in Radio login api as '<api output>'");
-//      WebBrowserUtil.captureScreenshot();
-//                
-//            }
-//
-//            @When("^I store API variable in Radio login api as '(.*)'$")			
-//            public void WhenIStoreApiVariableInRadioLoginApiAsstoreResponseVariable(String  _storeResponseVariable)
-//            {
-//                workFlow.getDataFromApiResponse(_storeResponseVariable,0,"Home Page","Home Page.storeresponsevariableTextBoxID","ID");
-//                
-//            }
+	@When("I set API endpoint in Get pet details API as {string}")
+	public void i_set_api_endpoint_in_get_pet_details_api_as(String URL) {
+		workFlow.setAPIEndpoint(URL);
+	}
+
+	@And("I set API Method in Get pet details API as {string}")
+	public void i_set_api_method_in_get_pet_details_api_as(String method) {
+		workFlow.setAPIMethod(method);
+	}
+
+	@And("I set API Headers in Get pet details API as {string}")
+	public void i_set_api_headers_in_get_pet_details_api_as(String apiHeader) {
+		workFlow.setAPIHeaders(apiHeader);
+	}
+
+	@And("I set API Parameter in Get pet details API as {string}")
+	public void i_set_api_parameter_in_get_pet_details_api_as(String apiParameterType) {
+		workFlow.setQueryParam(apiParameterType);
+	}
+
+	@Then("execute API and verify in Get pet details API as {string}")
+	public void execute_api_and_verify_in_get_pet_details_api_as(String expectedOutput) {
+		assertTrue(workFlow.executeAPIAndVerify(expectedOutput));
+	}
+}
 //
 //            @When("^I set API endpoint in Order Density api as '(.*)'$")			
 //            public void WhenISetApiEndpointInOrderDensityApiAsurl(String  _url)
