@@ -9,6 +9,15 @@
 	"Petstore_post_type":"post",
 	"Petstore_post_Request": "{ \"id\": 10, \"name\": \"doggie\", \"category\": { \"id\": 1, \"name\": \"Dogs\" }, \"photoUrls\": [ \"string\" ], \"tags\": [ { \"id\": 0, \"name\": \"string\" } ], \"status\": \"available\" }",
 	"Petstore_post_headers":"{\"Content-Type\": \"application/json\"}",
-	"Petstore_post_Response":"200"
+	"Petstore_post_Response":"200",
+	
+	"Order_Density_URL":"{{Baseurl}}api/v3/pet/findByStatus",
+	"Order_Density_apiheader":"{\"Content-Type\": \"application/json\"}",
+	"Order_Density_apiparametertype":"status=available",
+	"Order_Density_apioutput":"200",
+	
+	
+	"Order_Density_URL4":"{{Baseurl}}api/v3/pet/findByTags",
+	"Order_Density_apiparametertype4":"tags=string&tags=string"
 	
 }

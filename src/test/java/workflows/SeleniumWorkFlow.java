@@ -6,10 +6,6 @@ public class SeleniumWorkFlow {
 
 	static String baseurl = CommonUtil.getJSONTestData("Baseurl");
 
-	public void accesstoAPI() {
-		ApiRestAssured.lanchApiApplication();
-	}
-
 	public void setAPIEndpoint(String param) {
 
 		param = CommonUtil.getJSONTestData(param);
@@ -46,8 +42,14 @@ public class SeleniumWorkFlow {
 	}
 
 	public void getAcessTokenFromResponse(String param) {
-		param= CommonUtil.getJSONTestData(param)	;
+		param = CommonUtil.getJSONTestData(param);
 		ApiRestAssured.setAcessToken(param);
+	}
+
+	public void setQueryParam(String queryParam) {
+		queryParam = CommonUtil.getJSONTestData(queryParam);
+		ApiRestAssured.setApiQueryParam(queryParam);
+
 	}
 
 }

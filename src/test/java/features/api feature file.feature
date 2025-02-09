@@ -24,45 +24,37 @@ Feature: Pet Store Server based on the OpenAPI 3.0 specification
     Then I execute API request and verify response as '<ExpectedStatusCode>'
 
     Examples: 
-      | SlNo | URL               | Method             | RequestBody           | Headers               | ExpectedStatusCode |
-      |    1 | Petstore_post_url | Petstore_post_type | Petstore_post_Request | Petstore_post_headers |       Petstore_post_Response             |
-#
-#Total No. of Test Cases : 2
-#
-#@Order_Density_api_api_3
-#@test003
-#@Orders
-#Scenario Outline: Get the Snips by the type density
-#Given I have access to API URL
-#When I set API endpoint in Order Density api as '<URL>'
-#And I set API Method in Order Density api as 'get'
-#And I set API Headers in Order Density api as '<api header>'
-#And I set API Parameter in Order Density api as '<api parameter type>'
-#Then execute API and verify in Order Density api as '<api output>'
-#
-#Examples:
-#|SlNo.|URL|api header|api parameter type|api output|
-#|1|Order_Density_URL|Order_Density_apiheader|Order_Density_apiparametertype|Order_Density_apioutput|
-#
-#
-#Total No. of Test Cases : 3
-#
-#@Get_orders_in_the_inflight_tab_api_api_4
-#@test004
-#@Orders
-#Scenario Outline: Get the order in the Toread Tab
-#Given I have access to API URL
-#When I set API endpoint in Get orders in the inflight tab api as '<URL>'
-#And I set API Method in Get orders in the inflight tab api as 'get'
-#And I set API Headers in Get orders in the inflight tab api as '<api header>'
-#And I set API Parameter in Get orders in the inflight tab api as '<api parameter type>'
-#Then execute API and verify in Get orders in the inflight tab api as '<api output>'
-#
-#Examples:
-#|SlNo.|URL|api header|api parameter type|api output|
-#|1|Get_orders_in_the_inflight_tab_URL|Get_orders_in_the_inflight_tab_apiheader|Get_orders_in_the_inflight_tab_apiparametertype|Get_orders_in_the_inflight_tab_apioutput|
-#
-#
+      | SlNo | URL               | Method             | RequestBody           | Headers               | ExpectedStatusCode     |
+      |    1 | Petstore_post_url | Petstore_post_type | Petstore_post_Request | Petstore_post_headers | Petstore_post_Response |
+
+  #Total No. of Test Cases : 2
+  @Order_Density_api_api_3 @test003
+  Scenario Outline: Get pets by their availability status
+    Given I have access to API URL
+    When I set API endpoint in Order Density api as '<URL>'
+    And I set API Method as 'get'
+    And I set API Headers as '<api header>'
+    And I set API Parameter in Order Density api as '<api parameter type>'
+    Then execute API and verify in Order Density api as '<api output>'
+
+    Examples: 
+      | SlNo. | URL               | api header              | api parameter type             | api output              |
+      |     1 | Order_Density_URL | Order_Density_apiheader | Order_Density_apiparametertype | Order_Density_apioutput |
+
+  #Total No. of Test Cases : 3
+  @Get_orders_in_the_inflight_tab_api_api_4 @test004 @Orders
+  Scenario Outline: Get the order in the Toread Tab
+    Given I have access to API URL
+    When I set API endpoint in Order Density api as '<URL>'
+    And I set API Method as 'get'
+    And I set API Headers as '<api header>'
+    And I set API Parameter in Order Density api as '<api parameter type>'
+    Then execute API and verify in Get orders in the inflight tab api as '<api output>'
+
+    Examples: 
+      | SlNo. | URL                | api header              | api parameter type              | api output              |
+      |     1 | Order_Density_URL4 | Order_Density_apiheader | Order_Density_apiparametertype4 | Order_Density_apioutput |
+
 #Total No. of Test Cases : 4
 #
 #@Get_order_in_assure_response_api_api_5

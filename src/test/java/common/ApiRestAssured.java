@@ -15,6 +15,7 @@ public class ApiRestAssured {
 	private static String apiRequestPayload;
 	private static String accessToken;
 	public static Response response;
+	public static String queryParam;
 
 	// Reset static variables before and after tests
 	@Before
@@ -25,6 +26,7 @@ public class ApiRestAssured {
 		apiRequestPayload = null;
 		accessToken = null;
 		response = null;
+		queryParam = null;
 	}
 
 	@After
@@ -36,6 +38,7 @@ public class ApiRestAssured {
 		apiRequestPayload = null;
 		accessToken = null;
 		response = null;
+		queryParam = null;
 	}
 
 	// Setters for API inputs
@@ -59,6 +62,11 @@ public class ApiRestAssured {
 		ApiRestAssured.apiRequestPayload = apiRequestPayload;
 	}
 
+	public static void setApiQueryParam(String apiQueryParam) {
+		apiQueryParam = CommonUtil.getJSONTestData(apiQueryParam);
+		ApiRestAssured.queryParam = apiQueryParam;
+	}
+
 	// Universal method to verify API URL and handle chained requests
 	public static boolean verifyApiUrl(String param) {
 		try {
@@ -72,7 +80,7 @@ public class ApiRestAssured {
 				}
 			}
 
-			// Parse JSON Body Correctly
+			// Parse JSON Body Correctly (If needed for POST or PUT)
 			if (apiRequestPayload != null && !apiRequestPayload.isEmpty()) {
 				request.body(new JSONObject(apiRequestPayload).toString());
 			}
@@ -82,7 +90,19 @@ public class ApiRestAssured {
 				request.header("Authorization", "Bearer " + accessToken);
 			}
 
-			// Make API request (PUT Method)
+			// Add Query Parameters (if any)
+			if (queryParam != null && !queryParam.isEmpty()) {
+				// Assuming param is a query parameter string like "status=available"
+				String[] queryParams = queryParam.split("&"); // Split if there are multiple parameters
+				for (String queryParam : queryParams) {
+					String[] keyValue = queryParam.split("="); // Split each query parameter into key and value
+					if (keyValue.length == 2) {
+						request.queryParam(keyValue[0], keyValue[1]); // Add query parameter to request
+					}
+				}
+			}
+
+			// Make API request (e.g., GET method)
 			response = sendRequest(request, apiUrl, apiMethodType);
 
 			// Extract Status Code & Response Body
@@ -96,7 +116,7 @@ public class ApiRestAssured {
 			ExtentReportListener.reportextentLog = "Response Status Code: " + statusCode + "\nResponse Body: "
 					+ responseBody;
 
-			return statusCode == 200; // Return true if API call succeeds
+			return statusCode == Integer.parseInt(param); // Return true if API call succeeds
 		} catch (Exception e) {
 			System.out.println("Error verifying API URL: " + e.getMessage());
 			return false;
@@ -127,7 +147,4 @@ public class ApiRestAssured {
 		ExtentReportListener.reportextentLog = "Extracted Token: " + accessToken;
 	}
 
-	public static void lanchApiApplication() {
-
-	}
 }

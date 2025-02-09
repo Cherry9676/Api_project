@@ -5,89 +5,85 @@ import workflows.SeleniumWorkFlow;
 
 import static org.testng.Assert.assertTrue;
 
-import org.junit.Assert;
-
 public class HomePageStepDefinition {
 	SeleniumWorkFlow workFlow = new SeleniumWorkFlow();
 
 	@Given("^I have access to API URL$")
-	public void GivenIHaveAccessToApiUrl() {
-		workFlow.accesstoAPI();
-
+	public void iHaveAccessToAPIUrl() {
+		// Implement logic if needed
 	}
 
-	@When("^I set API endpoint in Update pet API as '(.*)'$")
-	public void WhenISetApiEndpointInLogsUserIntoTheSystemApiAsurl(String _url) {
-		workFlow.setAPIEndpoint(_url);
-
+	@When("^I set API endpoint in Update pet API as '([^']*)'$")
+	public void iSetAPIEndpointInUpdatePetAPI(String url) {
+		workFlow.setAPIEndpoint(url);
 	}
 
-	@When("^I set API Method in Update pet API as '(.*)'$")
-	public void WhenISetApiMethodInLogsUserIntoTheSystemApiAspost(String _post) {
-		workFlow.setAPIMethod(_post);
-
+	@When("^I set API Method in Update pet API as '([^']*)'$")
+	public void iSetAPIMethodInUpdatePetAPI(String method) {
+		workFlow.setAPIMethod(method);
 	}
 
-	@When("^I set API Request in Update pet API as '(.*)'$")
-	public void WhenISetApiRequestInLogsUserIntoTheSystemApiAsapiRequest(String _apiRequest) {
-		workFlow.setAPIRequest(_apiRequest);
-
+	@When("^I set API Request in Update pet API as '([^']*)'$")
+	public void iSetAPIRequestInUpdatePetAPI(String request) {
+		workFlow.setAPIRequest(request);
 	}
 
-	@When("^I set API Headers in Update pet API as '(.*)'$")
-	public void WhenISetApiHeadersInLogsUserIntoTheSystemApiAsapiHeader(String _apiHeader) {
-		workFlow.setAPIHeaders(_apiHeader);
-
+	@When("^I set API Headers in Update pet API as '([^']*)'$")
+	public void iSetAPIHeadersInUpdatePetAPI(String headers) {
+		workFlow.setAPIHeaders(headers);
 	}
 
-	@Then("^execute API and verify in Update pet API as '(.*)'$")
-	public void ThenExecuteApiVerifyInRadioLoginApiAsapiOutput1(String _apiOutput) {
-		assertTrue(workFlow.executeAPIAndVerify(_apiOutput));
+	@Then("^execute API and verify in Update pet API as '([^']*)'$")
+	public void executeAPIAndVerifyUpdatePetAPI(String expectedOutput) {
+		assertTrue(workFlow.executeAPIAndVerify(expectedOutput));
 	}
 
-	@When("^I store API variable in access token Radio login api as '(.*)'$")
-	public void WhenIStoreApiVariableInLogsUserIntoTheSystemApiAsstoreResponseVariable(String _storeResponseVariable) {
-		workFlow.getAcessTokenFromResponse(_storeResponseVariable);
-
+	@When("^I set API endpoint as '([^']*)'$")
+	public void iSetAPIEndpointAs(String url) {
+		workFlow.setAPIEndpoint(url);
 	}
 
-	@When("^I set API endpoint as '(.*)'$")
-	public void WhenISetApiEndpointInRadioLoginApiAsurl(String _url) {
-		workFlow.setAPIEndpoint(_url);
-
+	@When("^I set API Method as '([^']*)'$")
+	public void iSetAPIMethodAs(String method) {
+		workFlow.setAPIMethod(method);
 	}
 
-	@When("^I set API Method as '(.*)'$")
-	public void WhenISetApiMethodInRadioLoginApiAspost(String _post) {
-		workFlow.setAPIMethod(_post);
-
+	@When("^I set API Request Body as '([^']*)'$")
+	public void iSetAPIRequestBodyAs(String requestBody) {
+		workFlow.setAPIRequest(requestBody);
 	}
 
-	@When("^I set API Request Body as '(.*)'$")
-	public void WhenISetApiRequestInRadioLoginApiAsapiRequest(String _apiRequest) {
-		workFlow.setAPIRequest(_apiRequest);
-
+	@When("^I set API Headers as '([^']*)'$")
+	public void iSetAPIHeadersAs(String headers) {
+		workFlow.setAPIHeaders(headers);
 	}
 
-	@When("^I set API Headers as '(.*)'$")
-	public void WhenISetApiHeadersInRadioLoginApiAsapiHeader(String _apiHeader) {
-		workFlow.setAPIHeaders(_apiHeader);
-
+	@Then("^I execute API request and verify response as '([^']*)'$")
+	public void iExecuteAPIRequestAndVerifyResponse(String expectedStatusCode) {
+		assertTrue(workFlow.executeAPIAndVerify(expectedStatusCode));
 	}
 
-	@Then("^I execute API request and verify response as '(.*)'$")
-	public void ThenExecuteApiVerifyInRadioLoginApiAsapiOutput2(String _apiOutput) {
-
-		assertTrue(workFlow.executeAPIAndVerify(_apiOutput));
-
+	@When("^I set API endpoint in Order Density api as '([^']*)'$")
+	public void iSetAPIEndpointInOrderDensityAPI(String url) {
+		workFlow.setAPIEndpoint(url);
 	}
 
-	@When("^I store API variable in Radio login api as '(.*)'$")
-	public void WhenIStoreApiVariableInRadioLoginApiAsstoreResponseVariable(String _storeResponseVariable) {
-		workFlow.getAcessTokenFromResponse(_storeResponseVariable);
+	@When("^I set API Parameter in Order Density api as '([^']*)'$")
+	public void iSetAPIParameterInOrderDensityAPI(String params) {
+		workFlow.setQueryParam(params);
 	}
 
+	@Then("^execute API and verify in Order Density api as '([^']*)'$")
+	public void executeAPIAndVerifyInOrderDensityAPI(String expectedOutput) {
+		assertTrue(workFlow.executeAPIAndVerify(expectedOutput));
+	}
+
+	@Then("^execute API and verify in Get orders in the inflight tab api as '([^']*)'$")
+	public void executeAPIAndVerifyInGetOrdersInInflightTabAPI(String expectedOutput) {
+		assertTrue(workFlow.executeAPIAndVerify(expectedOutput));
+	}
 }
+
 //
 //            @When("^I set API endpoint in Radio login api as '(.*)'$")			
 //            public void WhenISetApiEndpointInRadioLoginApiAsurl(String  _url)
